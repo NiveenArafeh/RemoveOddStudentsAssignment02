@@ -20,7 +20,7 @@ public class RemoveOdd {
 
 	public static WebDriver driver;
 
-	public static void main(String[] args) throws InterruptedException, IOException {
+	public static void main(String[] args) throws  IOException {
 
 		driver = runBrowser("edge", driver);
 
@@ -31,27 +31,49 @@ public class RemoveOdd {
 		int totalSizeBeforeRemoving = allStudents.size(); // 16 students
 
 		System.out.println("All stusdents before removing : " + allStudents.size());
+		List <WebElement> studentsAfterRemoving;
 
-		int count = 0;
+	
 		
-		for (int i = 0; i < totalSizeBeforeRemoving; i++) {
-
-			if (i % 2 != 0) // if odd number ,remove the student
+		for (int i = 0; i < allStudents.size(); i++) {
+			
+			
+			if (i%2!=0) // if index[1]  ,remove the student
 			{
-				System.out.println(
-						"the removed person  is " + driver.findElements(By.tagName("option")).get(i).getText());
+				allStudents.get(i).click();
+				System.err.println(
+						"the removed person  is " + allStudents.get(i).getText());
 				driver.findElement(By.xpath("//*[@id=\"remove\"]")).click();
-				Thread.sleep(2000);
-				count++;
-				totalSizeBeforeRemoving = totalSizeBeforeRemoving - 1;
-				takeScreenShot();
-
+			
+				//takeScreenShot();
+         
+			}
+			else {
+				System.out.println("We will not remove "+ allStudents.get(i).getText());
 			}//end if
-
+		
+			//studentsAfterRemoving=driver.findElements(By.tagName("option"));
+			//totalSizeBeforeRemoving=studentsAfterRemoving.size();
+			
+		
 		}//end of for loop
-		System.out.println("The number of removed persons:" + count);
-		List <WebElement> studentsAfterRemoving= driver.findElements(By.tagName("option"));
-		System.out.println("Total size after removing:" +studentsAfterRemoving.size() );
+		/*List<WebElement> myList = driver.findElements(By.tagName("option"));
+
+		for (int i = 0 ; i < myList.size() ; i ++) {
+			
+
+			if (i%2!=0) {
+				myList.get(i).click();
+				System.err.println(myList.get(i).getText()+" sorry bye bye");
+
+				driver.findElement(By.id("remove")).click();
+				Thread.sleep(3000);
+
+			}
+			else {
+				System.out.println("i will keep "+myList.get(i).getText());
+			}
+		}*/
 
 	}
 
